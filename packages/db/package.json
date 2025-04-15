@@ -1,0 +1,20 @@
+{
+  "name": "db",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.14.1",
+    "@types/pg": "^8.11.13",
+    "drizzle-kit": "^0.31.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.42.0",
+    "pg": "^8.14.1",
+    "postgres": "^3.4.5"
+  }
+}
