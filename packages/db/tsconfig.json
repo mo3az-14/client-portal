@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "composite": true, // enables project references
+        "rootDir": "src",
+        "outDir": "dist",
+        "noEmit": false,
+        "emitDeclarationOnly": true,
+        "allowImportingTsExtensions": true
+    },
+    "include": [
+        "src"
+    ]
+}

@@ -5,6 +5,7 @@ import { auth } from '@/lib/auth/auth';
 import cors from 'cors'
 dotenv.config();
 
+console.log(process.env.BETTER_AUTH_URL)
 const PORT = process.env.SERVER_PORT;
 
 const app = express();

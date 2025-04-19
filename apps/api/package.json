@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun tsx ./src/app.ts"
+    "dev": "tsx watch index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -21,6 +21,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@client-portal/db": "workspace:*",
     "better-auth": "^1.2.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
