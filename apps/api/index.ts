@@ -24,5 +24,7 @@ app.all('/api/auth/*splat', toNodeHandler(auth));
 app.use(express.json());
 
 app.listen(PORT, () => {
-    console.log("listening on port :" + PORT)
+    console.log("server listening on port: " + PORT)
+    console.log("Database URL: " + process.env.DATABASE_URL)
+    console.log("better auth URL: " + process.env.BETTER_AUTH_URL)
 })
