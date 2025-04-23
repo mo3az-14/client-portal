@@ -5,21 +5,17 @@ import { auth } from '@/lib/auth/auth';
 import cors from 'cors'
 dotenv.config();
 
-console.log(process.env.BETTER_AUTH_URL)
 const PORT = process.env.SERVER_PORT;
 
 const app = express();
 
-// solve cors errors 
 app.use(cors({
     origin: 'http://localhost:' + process.env.CLIENT_PORT,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
 }));
 app.options('*ss', cors());
-
-// better auth mount handler 
-app.all('/api/auth/*splat', toNodeHandler(auth));
+app.all("/api/auth/*s", toNodeHandler(auth));
 
 app.use(express.json());
 
