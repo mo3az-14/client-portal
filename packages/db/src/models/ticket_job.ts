@@ -1,0 +1,8 @@
+import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
+import { job } from "./job";
+import { ticket } from "./ticket";
+
+export const ticket_job = pgTable('ticket_job', {
+    jobId: uuid("job_id").notNull().references(() => job.id).notNull(),
+    ticketId: uuid("ticket_id").notNull().references(() => ticket.id).notNull()
+}, (table) => [[primaryKey({ columns: [table.jobId, table.ticketId] })]])
