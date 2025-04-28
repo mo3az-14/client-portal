@@ -1,4 +1,6 @@
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from 'drizzle-zod'
+import { z } from 'zod'
 import { relations } from "drizzle-orm";
 import { job } from "./job";
 import { ticket } from "./ticket";
@@ -13,3 +15,6 @@ export const ticketJobRelations = relations(ticket_job, ({ one }) => ({
     tickets: one(ticket, { fields: [ticket_job.ticketId], references: [ticket.id] }),
     jobs: one(job, { fields: [ticket_job.jobId], references: [job.id] })
 }))
+
+const ticketJob = createInsertSchema(ticket_job)
+export type TicketJob = z.infer<typeof ticketJob>;

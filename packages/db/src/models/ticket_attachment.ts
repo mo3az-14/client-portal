@@ -1,4 +1,6 @@
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from 'drizzle-zod'
+import { z } from 'zod'
 import { relations } from "drizzle-orm";
 import { ticket } from "./ticket";
 import { files } from "./document";
@@ -13,3 +15,6 @@ export const ticketAttachmentRelations = relations(ticket_attachment, ({ one }) 
     ticket: one(ticket, { fields: [ticket_attachment.ticketId], references: [ticket.id] }),
 }))
 
+
+const ticketAttachment = createInsertSchema(ticket_attachment)
+export type TicketAttachment = z.infer<typeof ticketAttachment>;

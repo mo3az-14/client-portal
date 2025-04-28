@@ -1,4 +1,6 @@
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from 'drizzle-zod'
+import { z } from 'zod'
 import { relations } from "drizzle-orm";
 import { files } from "./document";
 import { service } from "./service";
@@ -13,3 +15,6 @@ export const requiredDocumentsRelations = relations(required_documents, ({ one, 
     attachments: one(files, { fields: [required_documents.attachmentId], references: [files.id] }),
 }))
 
+
+const requiredDocuments = createInsertSchema(required_documents)
+export type RequiredDocuments = z.infer<typeof requiredDocuments>;

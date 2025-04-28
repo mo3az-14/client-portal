@@ -1,3 +1,5 @@
+import { createInsertSchema } from 'drizzle-zod'
+import { z } from 'zod'
 import { pgTable, primaryKey, uuid, text } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { ticket } from "./ticket";
@@ -13,3 +15,5 @@ export const ticketReviewByRelations = relations(ticket_reviewby, ({ one }) => (
     ticket: one(ticket, { fields: [ticket_reviewby.ticketId], references: [ticket.id] }),
 }))
 
+const ticketReviewby = createInsertSchema(ticket_reviewby)
+export type TicketReviewby = z.infer<typeof ticketReviewby>

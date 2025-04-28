@@ -1,4 +1,6 @@
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from 'drizzle-zod'
+import { z } from 'zod'
 import { relations } from "drizzle-orm";
 import { notification } from "./notification";
 import { files } from "./document";
@@ -13,3 +15,6 @@ export const notificationAttachmentsRelations = relations(notification_attachmen
     attachement: one(files, { fields: [notification_attachment.attachmentId], references: [files.id] }),
 }))
 
+
+const notificationAttachment = createInsertSchema(notification_attachment)
+export type NotificationAttachment = z.infer<typeof notificationAttachment>;
