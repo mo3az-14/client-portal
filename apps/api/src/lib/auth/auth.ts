@@ -2,7 +2,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth";
 import db from '../db/db'
 import dotenv from 'dotenv'
-
+import { account, session, user, verification } from "@client-portal/db";
 dotenv.config();
 
 export const auth = betterAuth({
@@ -12,6 +12,12 @@ export const auth = betterAuth({
     },
     database: drizzleAdapter(db, {
         provider: "pg",
+        schema: {
+            user,
+            session,
+            verification,
+            account
+        }
     }),
     appName: "api",
     plugins: [],

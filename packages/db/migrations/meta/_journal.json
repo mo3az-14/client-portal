@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1744799806115,
+      "tag": "0000_young_cable",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1745269232817,
+      "tag": "0001_blushing_queen_noir",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1745513024688,
+      "tag": "0002_nervous_blacklash",
+      "breakpoints": true
+    }
+  ]
+}
