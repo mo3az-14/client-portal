@@ -1,9 +1,12 @@
 {
-  "name": "api",
+  "name": "@client-portal/api",
   "module": "index.ts",
-  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {},
   "scripts": {
-    "dev": "tsx watch index.ts"
+    "dev": "tsx watch ./src/index.ts",
+    "build": "tsc --project tsconfig.build.json"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -30,6 +33,7 @@
     "express-zod-api": "^23.0.0",
     "pg": "^8.14.1",
     "postgres": "^3.4.5",
+    "uploadthing": "^7.6.0",
     "zod": "^3.24.2"
   }
 }

@@ -11,8 +11,8 @@ export const service_templates = pgTable('service_templates', {
 }, (table) => [primaryKey({ columns: [table.serviceId, table.template] })])
 
 export const serviceTemplateRelations = relations(service_templates, ({ one }) => ({
-    service: one(service, { fields: [service_templates.serviceId], references: [service.id] }),
-    template: one(files, { fields: [service_templates.template], references: [files.id] }),
+    service: one(service, { fields: [service_templates.serviceId], references: [service.id], relationName: "service" }),
+    template: one(files, { fields: [service_templates.template], references: [files.id], relationName: "template" }),
 }))
 
 const serviceTemplates = createInsertSchema(service_templates)

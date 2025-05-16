@@ -12,8 +12,8 @@ export const ticket_job = pgTable('ticket_job', {
 
 
 export const ticketJobRelations = relations(ticket_job, ({ one }) => ({
-    tickets: one(ticket, { fields: [ticket_job.ticketId], references: [ticket.id] }),
-    jobs: one(job, { fields: [ticket_job.jobId], references: [job.id] })
+    tickets: one(ticket, { fields: [ticket_job.ticketId], references: [ticket.id], relationName: "tickets" }),
+    jobs: one(job, { fields: [ticket_job.jobId], references: [job.id], relationName: "jobs" })
 }))
 
 const ticketJob = createInsertSchema(ticket_job)

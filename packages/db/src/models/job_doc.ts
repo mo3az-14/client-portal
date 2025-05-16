@@ -12,8 +12,8 @@ export const job_document = pgTable('job_document', {
     (table) => [primaryKey({ columns: [table.jobId, table.documentId] }),]
 )
 export const jobDocumentRelations = relations(job_document, ({ one }) => ({
-    job: one(job, { fields: [job_document.jobId], references: [job.id] }),
-    documents: one(files, { fields: [job_document.documentId], references: [files.id] })
+    job: one(job, { fields: [job_document.jobId], references: [job.id], relationName: "job" }),
+    documents: one(files, { fields: [job_document.documentId], references: [files.id], relationName: "documents" })
 }))
 
 

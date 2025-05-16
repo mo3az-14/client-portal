@@ -12,8 +12,8 @@ export const job_accountants = pgTable("job_accountants", {
 }, (table) => [primaryKey({ columns: [table.jobId, table.accountantId] })])
 
 export const jobAccountantRelations = relations(job_accountants, ({ one }) => ({
-    job: one(job, { fields: [job_accountants.jobId], references: [job.id] }),
-    accountant: one(user, { fields: [job_accountants.accountantId], references: [user.id] }),
+    job: one(job, { fields: [job_accountants.jobId], references: [job.id], relationName: "job" }),
+    accountant: one(user, { fields: [job_accountants.accountantId], references: [user.id], relationName: "accountant" }),
 }))
 
 const jobAccountants = createInsertSchema(job_accountants, {

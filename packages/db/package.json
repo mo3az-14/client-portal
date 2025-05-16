@@ -1,14 +1,20 @@
 {
     "name": "@client-portal/db",
     "version": "0.1.0",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
     "type": "module",
     "files": [
         "dist"
     ],
     "scripts": {
-        "build": "tsc --project tsconfig.build.json"
+        "build": "bunx drizzle-kit push && tsc --project tsconfig.build.json",
+        "dev": "bunx drizzle-kit push && tsc --watch "
     },
     "peerDependencies": {
         "drizzle-orm": "*",

@@ -1,5 +1,7 @@
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { user } from "./user";
+import { createSelectSchema } from "drizzle-zod";
+import type { z } from "zod";
 
 export const session = pgTable('session', {
     id: text("id").primaryKey(),
@@ -11,3 +13,7 @@ export const session = pgTable('session', {
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
+
+export const sessionSchema = createSelectSchema(session);
+
+export type Session = z.infer<typeof sessionSchema>;

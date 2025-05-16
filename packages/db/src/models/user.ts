@@ -4,7 +4,6 @@ import { ticket_reviewby } from './ticket_review';
 import { job_accountants } from './job_accountant';
 import { files } from './document';
 import { job } from './job';
-import { ticket } from './ticket';
 import { notification } from './notification';
 import { createInsertSchema } from 'drizzle-zod';
 import { z } from 'zod';
@@ -15,17 +14,19 @@ export const user = pgTable('user', {
     email: text('email').notNull().unique(),
     emailVerified: boolean("email_verified").notNull().default(false),
     image: text("image"),
+    phoneNumber: text("phone_number"),
+    phoneNumberVerified: boolean('phone_number_verified'),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
-export const userRelations = relations(user, ({ many }) => ({
-    reveiwer: many(ticket_reviewby),
-    accountant: many(job_accountants),
-    documents: many(files),
-    jobs: many(job),
-    tickets: many(ticket),
-    notifications: many(notification),
+export const userRelations = relations(user, ({ one, many }) => ({
+    reveiwer: many(ticket_reviewby, { relationName: 'reviewBy' }),
+    accountant: many(job_accountants,),
+    documents: many(files,),
+    jobs: many(job,),
+    notifications: many(notification, { relationName: "sender" }),
+    receiver: many(notification, { relationName: "receiver" })
 }))
 
 const baseSchema = createInsertSchema(user, {

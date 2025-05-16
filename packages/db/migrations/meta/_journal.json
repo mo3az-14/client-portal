@@ -22,6 +22,27 @@
       "when": 1745513024688,
       "tag": "0002_nervous_blacklash",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1745997410844,
+      "tag": "0003_true_squadron_supreme",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1745998303710,
+      "tag": "0004_polite_doctor_spectrum",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1745998366149,
+      "tag": "0005_awesome_raider",
+      "breakpoints": true
     }
   ]
 }

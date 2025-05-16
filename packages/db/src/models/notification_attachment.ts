@@ -11,8 +11,8 @@ export const notification_attachment = pgTable("job_notification", {
 }, (table) => [primaryKey({ columns: [table.notificationId, table.attachmentId] })])
 
 export const notificationAttachmentsRelations = relations(notification_attachment, ({ one }) => ({
-    notification: one(notification, { fields: [notification_attachment.notificationId], references: [notification.id] }),
-    attachement: one(files, { fields: [notification_attachment.attachmentId], references: [files.id] }),
+    notification: one(notification, { fields: [notification_attachment.notificationId], references: [notification.id], relationName: "notification" }),
+    attachement: one(files, { fields: [notification_attachment.attachmentId], references: [files.id], relationName: "attachement" }),
 }))
 
 

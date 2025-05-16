@@ -4,11 +4,38 @@ import db from '../db/db'
 import dotenv from 'dotenv'
 import { account, session, user, verification } from "@client-portal/db";
 dotenv.config();
-
 export const auth = betterAuth({
-    trustedOrigins: [`http://localhost:${process.env.CLIENT_PORT}`],
+    trustedOrigins: [process.env.CLIENT_URL!],
+    databaseHooks: {
+        user: {
+            create: {
+                before: async (user) => {
+                    return {
+                        data: {
+                            ...user,
+                            phoneNumberVerified: true,
+                        }
+                    }
+                }
+            }
+        }
+    },
+    user: {
+        additionalFields: {
+            phoneNumber: {
+                type: "string",
+                required: false,
+                input: true,
+            },
+            phoneNumberVerified: {
+                type: "string",
+                required: false,
+                input: true,
+            }
+        }
+    },
     emailAndPassword: {
-        enabled: true
+        enabled: true,
     },
     database: drizzleAdapter(db, {
         provider: "pg",
@@ -16,9 +43,24 @@ export const auth = betterAuth({
             user,
             session,
             verification,
-            account
+            account,
+
         }
     }),
+    session: {
+        cookieCache: {
+            enabled: true,
+            maxAge: 5 * 60 // Cache duration in seconds
+        }
+    },
+    socialProviders: {
+        google: {
+            prompt: "select_account",
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+
+        },
+    },
     appName: "api",
     plugins: [],
 });

@@ -18,9 +18,10 @@ export const notification = pgTable('notification', {
 })
 
 export const notificationRelations = relations(notification, ({ many, one }) => ({
-    attachments: many(notification_attachment),
-    jobs: many(job_notification), sender: one(user, { fields: [notification.senderId], references: [user.id] }),
-    receivers: many(user),
+    attachments: many(notification_attachment,),
+    jobs: many(job_notification,),
+    sender: one(user, { fields: [notification.senderId], references: [user.id], relationName: 'sender' }),
+    receivers: one(user, { fields: [notification.receiverId], references: [user.id], relationName: "receiver" }),
 }))
 
 export const baseSchema = createInsertSchema(notification).omit({ createdAt: true, updatedAt: true })

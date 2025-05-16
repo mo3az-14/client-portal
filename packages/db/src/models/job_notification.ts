@@ -11,8 +11,8 @@ export const job_notification = pgTable("job_notification", {
 }, (table) => [primaryKey({ columns: [table.jobId, table.notificationId] })])
 
 export const jobNotificationRelations = relations(job_notification, ({ one }) => ({
-    job: one(job, { fields: [job_notification.jobId], references: [job.id] }),
-    notification: one(notification, { fields: [job_notification.notificationId], references: [notification.id] })
+    job: one(job, { fields: [job_notification.jobId], references: [job.id], relationName: "job" }),
+    notification: one(notification, { fields: [job_notification.notificationId], references: [notification.id], relationName: "notification" })
 }))
 
 

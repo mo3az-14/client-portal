@@ -3,7 +3,7 @@
     "compilerOptions": {
         "composite": true, // enables project references
         "rootDir": "src",
-        "noEmit": false,
+        "noEmit": true,
         "declaration": true,
         "declarationMap": true,
         "outDir": "dist",
@@ -11,5 +11,9 @@
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
     ]
 }

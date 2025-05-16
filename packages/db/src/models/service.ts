@@ -11,11 +11,11 @@ export const service = pgTable("service", {
     template: uuid().notNull().references(() => files.id),
     period: integer(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("created_at").notNull().defaultNow().$onUpdate(() => new Date()),
+    updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
 })
 
 export const serviceRelations = relations(service, ({ many }) => ({
-    documents: many(required_documents),
-    templates: many(service_templates),
+    documents: many(required_documents,),
+    templates: many(service_templates,),
 }))
 

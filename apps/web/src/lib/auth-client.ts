@@ -1,6 +1,20 @@
 import { createAuthClient } from "better-auth/react"
+import { inferAdditionalFields } from "better-auth/client/plugins";
 export const authClient = createAuthClient({
-    baseURL: process.env.SERVER_URL,
+    baseURL: import.meta.env.VITE_SERVER_URL,
     fetchOptions: { credentials: "include" },
-    plugins: [],
+    plugins: [inferAdditionalFields({
+        user: {
+            phoneNumber: {
+                type: "string",
+                required: false,
+                input: true,
+            },
+            phoneNumberVerified: {
+                type: "string",
+                required: false,
+                input: true,
+            }
+        }
+    })],
 })

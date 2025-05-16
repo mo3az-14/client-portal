@@ -12,14 +12,14 @@ export const job = pgTable('job', {
     customerId: text("customer_id").notNull().references(() => user.id),
     status: text(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("created_at").notNull().defaultNow().$onUpdate(() => new Date()),
+    updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
 })
 export const jobRelations = relations(job, ({ many, one }) => ({
-    tickets: many(ticket_job),
-    notifications: many(job_notification),
-    documents: many(job_document),
-    accountants: many(job_accountants),
-    customer: one(user, { fields: [job.customerId], references: [user.id] }),
+    tickets: many(ticket_job,),
+    notifications: many(job_notification,),
+    documents: many(job_document,),
+    accountants: many(job_accountants,),
+    customer: one(user, { fields: [job.customerId], references: [user.id], relationName: 'customer' }),
 }))
 
 const baseSchema = createInsertSchema(job).omit({ createdAt: true, updatedAt: true });

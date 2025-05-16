@@ -11,8 +11,8 @@ export const ticket_reviewby = pgTable('ticket_reviewby', {
 }, (table) => [primaryKey({ columns: [table.ticketId, table.reviewBy] })])
 
 export const ticketReviewByRelations = relations(ticket_reviewby, ({ one }) => ({
-    reviewBy: one(user, { fields: [ticket_reviewby.reviewBy], references: [user.id] }),
-    ticket: one(ticket, { fields: [ticket_reviewby.ticketId], references: [ticket.id] }),
+    reviewBy: one(user, { fields: [ticket_reviewby.reviewBy], references: [user.id], relationName: "reviewBy" }),
+    ticket: one(ticket, { fields: [ticket_reviewby.ticketId], references: [ticket.id], relationName: "ticket" }),
 }))
 
 const ticketReviewby = createInsertSchema(ticket_reviewby)

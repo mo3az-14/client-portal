@@ -23,11 +23,10 @@ export const ticket = pgTable('ticket', {
 })
 
 export const ticketRelations = relations(ticket, ({ many, one }) => ({
-    reviewers: many(ticket_reviewby),
+    reviewers: many(ticket_reviewby, { relationName: "ticket" }),
     jobs: many(ticket_job),
     attachments: many(ticket_attachment),
     createdBy: one(user, { relationName: "createdBy", fields: [ticket.createdBy], references: [user.id] }),
-    reviewedBy: many(user, { relationName: "reviewdBy" }),
 }))
 
 const baseSchema = createInsertSchema(ticket, {

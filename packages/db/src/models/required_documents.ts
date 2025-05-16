@@ -11,8 +11,8 @@ export const required_documents = pgTable("required_documents", {
 }, (table) => [primaryKey({ columns: [table.attachmentId, table.serviceId] })])
 
 export const requiredDocumentsRelations = relations(required_documents, ({ one, }) => ({
-    service: one(service, { fields: [required_documents.serviceId], references: [service.id] }),
-    attachments: one(files, { fields: [required_documents.attachmentId], references: [files.id] }),
+    service: one(service, { fields: [required_documents.serviceId], references: [service.id], relationName: "service" }),
+    attachments: one(files, { fields: [required_documents.attachmentId], references: [files.id], relationName: "attachments" }),
 }))
 
 

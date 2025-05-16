@@ -13,21 +13,23 @@ export const files = pgTable("document", {
     uploadedBy: text("uploaded_by").notNull().references(() => user.id),
     name: text().notNull(),
     type: text().notNull(),
+    key: text(),
     url: text().notNull().unique(),
     metadata: jsonb(),
     version: integer().notNull().default(1),
     status: text(),
     tags: text(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("created_at").notNull().defaultNow().$onUpdate(() => new Date()),
+    updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
 })
 
-export const filesRelations = relations(files, ({ many }) => ({
-    ticketAttachment: many(ticket_attachment),
-    serviceTemplate: many(service_templates),
-    requiredDocument: many(required_documents),
-    notificationAttachment: many(notification_attachment),
-    jobDocument: many(job_document),
+export const filesRelations = relations(files, ({ one, many }) => ({
+    ticketAttachment: many(ticket_attachment,),
+    serviceTemplate: many(service_templates,),
+    requiredDocument: many(required_documents,),
+    notificationAttachment: many(notification_attachment,),
+    jobDocument: many(job_document,),
+    uploadedBy: one(user, { fields: [files.uploadedBy], references: [user.id] }),
 }))
 
 const baseSchema = createInsertSchema(files).omit({ createdAt: true, updatedAt: true })
@@ -43,6 +45,7 @@ export const documentSchema = z.union([
         version: baseSchema.shape.version,
         status: baseSchema.shape.status,
         tags: baseSchema.shape.tags,
+        key: baseSchema.shape.key,
     }),
     z.object({
         mode: z.literal('update'),
@@ -55,7 +58,9 @@ export const documentSchema = z.union([
         version: baseSchema.shape.version,
         status: baseSchema.shape.status,
         tags: baseSchema.shape.tags,
+        key: baseSchema.shape.key,
     })
+
 ])
-export type documentSchema = z.infer<typeof documentSchema>
-export type selectDocumentModel = InferSelectModel<typeof files>
+export type DocumentSchema = z.infer<typeof documentSchema>
+export type SelectDocumentModel = InferSelectModel<typeof files>
