@@ -19,10 +19,17 @@
         "VITE_NODE_ENV"
       ],
       "passThroughEnv": [
+        "SERVER_PORT",
+        "DATABASE_URL",
+        "BETTER_AUTH_URL",
+        "CLIENT_URL",
+        "GOOGLE_CLIENT_SECRET",
+        "GOOGLE_CLIENT_ID",
+        "UPLOADTHING_TOKEN",
+        "NODE_ENV",
         "VITE_SERVER_URL",
         "VITE_FRONTEND_URL",
-        "VITE_NODE_ENV",
-        "DATABASE_URL"
+        "VITE_NODE_ENV"
       ],
       "inputs": [
         "$TURBO_DEFAULTS",
