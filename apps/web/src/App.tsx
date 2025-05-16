@@ -3,10 +3,10 @@ import LoginPage from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage"
 import { HomePage } from "./pages/HomePage"
 import { Navbar } from "./components/Navbar"
-import { ProtectedRoute } from "@/components/ProtectedRoute"
+import { ProtectedRoute } from "./components/ProtectedRoute"
 import { useEffect } from "react"
 import { userStore } from "./stores/userStore"
-import Upload from "@/pages/Upload"
+import Upload from "pages/Upload"
 import { LoggedIn } from "./components/LoggedIn"
 let is_intial = true
 function App() {
