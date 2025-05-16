@@ -6,7 +6,7 @@ import { Navbar } from "./components/Navbar"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import { useEffect } from "react"
 import { userStore } from "./stores/userStore"
-import Upload from "pages/Upload"
+import Upload from "./pages/Upload"
 import { LoggedIn } from "./components/LoggedIn"
 let is_intial = true
 function App() {
