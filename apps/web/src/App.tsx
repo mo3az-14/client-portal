@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom"
-import LoginPage from "./pages/LoginPage"
-import SignupPage from "./pages/SignupPage"
-import { HomePage } from "./pages/HomePage"
-import { Navbar } from "./components/Navbar"
-import { ProtectedRoute } from "./components/ProtectedRoute"
+import LoginPage from "src/pages/LoginPage"
+import SignupPage from "src/pages/SignupPage"
+import { HomePage } from "src/pages/HomePage"
+import { Navbar } from "src/components/Navbar"
+import { ProtectedRoute } from "src/components/ProtectedRoute"
 import { useEffect } from "react"
-import { userStore } from "./stores/userStore"
-import Upload from "./pages/Upload"
-import { LoggedIn } from "./components/LoggedIn"
+import { userStore } from "src/stores/userStore"
+import Upload from "src/pages/Upload"
+import { LoggedIn } from "src/components/LoggedIn"
 let is_intial = true
 function App() {
     const { getUserSession } = userStore()
