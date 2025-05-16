@@ -1,0 +1,1 @@
+ALTER TABLE "document" ADD COLUMN "isPDF" text;
