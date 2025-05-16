@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "build": "bunx drizzle-kit push && tsc --project tsconfig.build.json",
-        "dev": "bunx drizzle-kit push && tsc --watch "
+        "dev": "tsc --watch "
     },
     "peerDependencies": {
         "drizzle-orm": "*",
