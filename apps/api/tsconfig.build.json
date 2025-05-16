@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": false, // actually write JS
+        "allowImportingTsExtensions": false, // disable .ts imports
+        "declaration": true, // emit .d.ts for types
+        "declarationMap": true, // optional for IDE navigation
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "include": [
+        "src"
+    ]
+}
