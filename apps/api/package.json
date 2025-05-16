@@ -6,7 +6,8 @@
   "exports": {},
   "scripts": {
     "dev": "tsx watch ./src/index.ts",
-    "build": "tsc --project tsconfig.build.json"
+    "build": "tsc --project tsconfig.build.json",
+    "start": "bun ./dist/index.js"
   },
   "devDependencies": {
     "@types/bun": "latest",
