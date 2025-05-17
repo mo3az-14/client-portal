@@ -1,4 +1,5 @@
 # client_portal
+/bin/bash: line 1: tree: command not found
 
 To install dependencies:
 

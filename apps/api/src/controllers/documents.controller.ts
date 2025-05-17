@@ -1,5 +1,5 @@
 import type { Response, Request } from 'express'
-import db from '@/lib/db/db';
+import db from '../lib/db/db';
 import { files, type DocumentSchema } from '@client-portal/db';
 import { eq } from 'drizzle-orm';
 import { UTApi } from 'uploadthing/server';

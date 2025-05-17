@@ -1,5 +1,5 @@
-import { getAllUploadedDocuments } from "@/controllers/documents.controller";
-import { protetctedRoute } from "@/middleware/auth.middleware";
+import { getAllUploadedDocuments } from "../controllers/documents.controller";
+import { protetctedRoute } from "../middleware/auth.middleware";
 import express from "express";
 
 const router = express.Router();

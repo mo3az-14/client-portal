@@ -1,10 +1,10 @@
 import { createRouteHandler, createUploadthing, type FileRouter } from 'uploadthing/express';
 import { UploadThingError } from "uploadthing/server";
 import { fromNodeHeaders } from "better-auth/node";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "../lib/auth/auth";
 import type { Session, User } from "better-auth";
 import { files, type DocumentSchema } from '@client-portal/db';
-import db from '@/lib/db/db';
+import db from '../lib/db/db';
 type CreateDocument = Omit<Extract<DocumentSchema, { mode: 'create' }>, "mode">;
 const f = createUploadthing();
 export const uploadRouter = {

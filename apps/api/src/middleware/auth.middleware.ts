@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import { auth } from "@/lib/auth/auth";
+import { auth } from "../lib/auth/auth";
 import { fromNodeHeaders } from "better-auth/node";
 import type { Session, User } from 'better-auth';
 
