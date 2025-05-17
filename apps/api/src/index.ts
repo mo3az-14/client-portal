@@ -33,3 +33,4 @@ app.use("/api/uploadthing", uploadRouterHandler);
 app.listen(PORT, () => {
     console.log("server listening on port: " + PORT)
 })
+export default app 
