@@ -5,8 +5,8 @@
   "types": "dist/index.d.ts",
   "exports": {},
   "scripts": {
-    "dev": "tsx watch ./src/index.ts",
-    "build": "tsc --project tsconfig.build.json",
+    "dev": "tsup --watch ./src/index.ts --config ./tsup.config.ts",
+    "build": "tsup",
     "start": "bun ./dist/index.js"
   },
   "devDependencies": {

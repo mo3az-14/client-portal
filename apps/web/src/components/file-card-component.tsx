@@ -30,7 +30,7 @@ type Files = {
     files: FileInformation[]
 }
 const getDocuments = async (): Promise<Files> => {
-    const response = await axios.get<Files>('/documents')
+    const response = await axios.get<Files>('documents')
     return response.data
 }
 
@@ -45,6 +45,7 @@ const FileGallery = () => {
     if (isLoading) {
         return <SkeletonCard />
     }
+
     const files = data?.files
     // Example data - you would replace this with your actual data
 
@@ -52,7 +53,7 @@ const FileGallery = () => {
         <div className="p-6 min-h-screen">
             <h1 className="text-2xl font-bold mb-6 ">My Files</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {files?.map((file, index) => (
+                {files && files?.map((file, index) => (
                     <FileCard key={index} file={file} />
                 ))}
             </div>

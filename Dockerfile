@@ -1,16 +1,18 @@
 FROM oven/bun:latest AS deps
+
 WORKDIR /app
 
-copy . /app
+COPY package*.json ./
+COPY packages/db/package*.json ./packages/db/
+COPY apps/web/package*.json ./apps/web/
+COPY apps/api/package*.json ./apps/api/
 
-RUN bun install 
+RUN bun install  --production
 
-RUN bun turbo build
-
-ENV NODE_ENV=production
+COPY . .
 
 EXPOSE 4000
 
-WORKDIR apps/api
+RUN bun run build
 
-CMD ["bun" , "dist/index.js"]
+CMD ["bun" , "apps/api/dist/index.js"]
