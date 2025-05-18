@@ -1,11 +1,11 @@
-import 'dotenv/config';
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth";
 import db from '../db/db'
+import dotenv from 'dotenv'
 import { account, session, user, verification } from "@client-portal/db";
-import { env } from "../../config";
+dotenv.config();
 export const auth = betterAuth({
-    trustedOrigins: [env.CLIENT_URL!, "http://localhost:4001"],
+    trustedOrigins: [process.env.CLIENT_URL!],
     databaseHooks: {
         user: {
             create: {
@@ -56,8 +56,8 @@ export const auth = betterAuth({
     socialProviders: {
         google: {
             prompt: "select_account",
-            clientId: env.GOOGLE_CLIENT_ID!,
-            clientSecret: env.GOOGLE_CLIENT_SECRET!,
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 
         },
     },

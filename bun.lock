@@ -3,9 +3,11 @@
   "workspaces": {
     "": {
       "name": "client_portal",
+      "dependencies": {
+        "tsup": "^8.5.0",
+      },
       "devDependencies": {
         "prettier": "latest",
-        "tsup": "^8.5.0",
         "turbo": "latest",
         "typescript": "^5.8.3",
       },
@@ -92,9 +94,6 @@
     "packages/db": {
       "name": "@client-portal/db",
       "version": "0.1.0",
-      "devDependencies": {
-        "tsup": "^8.5.0",
-      },
       "peerDependencies": {
         "drizzle-orm": "*",
         "drizzle-zod": "*",

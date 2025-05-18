@@ -63,7 +63,7 @@ export const userStore = create<UserStore>((set, get) => ({
             password: password,
         }, {
             onError(ctx) {
-                console.log('bad login login');
+                console.log('successful login');
                 console.log(ctx);
             },
             onSuccess: () => {
@@ -77,7 +77,6 @@ export const userStore = create<UserStore>((set, get) => ({
         return { user: get().user, session: get().session }
     },
     socialGoogleLogin: async () => {
-        console.log(import.meta.env.VITE_FRONTEND_URL)
         const data = await authClient.signIn.social({
             provider: "google",
             callbackURL: import.meta.env.VITE_FRONTEND_URL

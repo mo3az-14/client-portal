@@ -13,7 +13,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup --dts && bunx drizzle-kit push ",
+        "build": "bunx drizzle-kit push && tsc --project tsconfig.build.json",
         "dev": "tsc --watch "
     },
     "peerDependencies": {

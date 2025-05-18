@@ -1,0 +1,9 @@
+- [ ] write a respectable README.md
+- [ ] make a docker compose file to automate everything
+- [ ] make a better UI for fucks sake
+- [ ] Complete the rest of file operations 
+    - [x] create
+    - [ ] update (delete and create)
+    - [ ] delete
+    - [ ] download
+    - [x] read

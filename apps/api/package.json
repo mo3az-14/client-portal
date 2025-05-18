@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "exports": {},
   "scripts": {
-    "dev": "tsup --watch ./src/index.ts --config ./tsup.config.ts",
+    "dev": "tsx watch ./src/index.ts",
     "build": "tsup",
     "start": "bun ./dist/index.js"
   },
@@ -24,7 +24,7 @@
   "peerDependencies": {
     "typescript": "^5.8.3"
   },
-  "dependencies": {
+  "detpendencies": {
     "@client-portal/db": "workspace:*",
     "better-auth": "^1.2.7",
     "cors": "^2.8.5",

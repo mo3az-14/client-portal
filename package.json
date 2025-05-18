@@ -13,17 +13,16 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo run test"
   },
-  "dependencies": {
-    "turbo": "latest"
-  },
   "devDependencies": {
     "prettier": "latest",
-    "tsup": "^8.5.0",
     "turbo": "latest",
     "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=18.0.0"
   },
-  "packageManager": "bun@1.0.0"
+  "packageManager": "bun@1.0.0",
+  "dependencies": {
+    "tsup": "^8.5.0"
+  }
 }

@@ -1,8 +1,8 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-    name: "client_API",
-    entry: ["src/index.ts"],
+    name: "frontline",
+    entry: ["src/server.ts"],
     outDir: "dist",
     clean: true,
     format: ["cjs", "esm"],

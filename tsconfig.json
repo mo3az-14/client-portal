@@ -22,11 +22,6 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
-    "paths": {
-      "@client-portal/db": [
-        "./packages/db/dist"
-      ]
-    }
+    "noPropertyAccessFromIndexSignature": false
   }
 }

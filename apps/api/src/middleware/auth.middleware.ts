@@ -17,6 +17,6 @@ export const protetctedRoute = async (req: Request, res: Response, next: NextFun
     next();
 }
 export const logRequest = (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.url)
+    console.log(req.headers.cookie)
     next()
 }
