@@ -16,14 +16,8 @@ export default ({ mode }: { mode: string }) => {
             alias: {
                 "@": path.resolve(__dirname, "./src"),
             },
-            preserveSymlinks: true,
         },
         server: {
-            fs: {
-                allow: [
-                    path.resolve(__dirname, '../..')
-                ]
-            },
             port: 5173,
             proxy: {
                 '/api': {

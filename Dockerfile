@@ -1,14 +1,14 @@
 FROM oven/bun:latest AS deps
 WORKDIR /app
 
-COPY bun.lock package.json turbo.json ./
+COPY package.json turbo.json ./
 COPY apps/api/package*.json apps/api/
 COPY apps/web/package*.json apps/web/
-COPY packages/db/package*.json apps/web/
+COPY packages/db/package*.json packages/db/
 
 ENV NODE_ENV=production
 
-RUN bun install --frozen-lockfile
+RUN bun install
 
 copy . .
 

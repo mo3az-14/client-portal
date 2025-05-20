@@ -26,6 +26,7 @@
     "tsup": "^8.5.0"
   },
   "trustedDependencies": [
-    "@tailwindcss/oxide"
+    "@tailwindcss/oxide",
+    "esbuild"
   ]
 }
