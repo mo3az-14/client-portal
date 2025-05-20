@@ -8,6 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default ({ mode }: { mode: string }) => {
 
     const env = loadEnv(mode, process.cwd(), "VITE_")
+
     return defineConfig({
         plugins: [react(), tsconfigPaths(), tailwindcss(), nodePolyfills()],
 
@@ -15,8 +16,14 @@ export default ({ mode }: { mode: string }) => {
             alias: {
                 "@": path.resolve(__dirname, "./src"),
             },
+            preserveSymlinks: true,
         },
         server: {
+            fs: {
+                allow: [
+                    path.resolve(__dirname, '../..')
+                ]
+            },
             port: 5173,
             proxy: {
                 '/api': {

@@ -22,19 +22,20 @@
     "vitest": "^3.1.1"
   },
   "peerDependencies": {
+    "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
-  "detpendencies": {
+  "dependencies": {
     "@client-portal/db": "workspace:*",
     "better-auth": "^1.2.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.42.0",
+    "drizzle-orm": "0.42.0",
     "express": "^5.1.0",
     "express-zod-api": "^23.0.0",
     "pg": "^8.14.1",
     "postgres": "^3.4.5",
     "uploadthing": "^7.6.0",
-    "zod": "^3.24.2"
+    "zod": "3.24.2"
   }
 }

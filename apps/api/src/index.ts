@@ -1,6 +1,7 @@
 import path from 'path'
-import express from 'express';
 import dotenv from 'dotenv'
+dotenv.config();
+import express from 'express';
 import { toNodeHandler } from "better-auth/node"; import { auth } from './lib/auth/auth';
 import cors from 'cors'
 import documentRoutes from "./routes/document.route"
@@ -13,7 +14,6 @@ declare module "express-serve-static-core" {
         user: User,
     }
 }
-dotenv.config();
 
 const PORT = process.env.SERVER_PORT;
 

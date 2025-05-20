@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-    name: "api",
+    name: "database",
     entry: ["src/index.ts"],
     outDir: "dist",
     clean: true,

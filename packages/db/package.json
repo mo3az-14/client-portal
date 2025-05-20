@@ -13,12 +13,16 @@
         "dist"
     ],
     "scripts": {
-        "build": "bunx drizzle-kit push && tsc --project tsconfig.build.json",
+        "build": "tsup && tsup --dts-only && bunx drizzle-kit push",
         "dev": "tsc --watch "
     },
     "peerDependencies": {
         "drizzle-orm": "*",
-        "drizzle-zod": "*",
-        "zod": "*"
+        "zod": "*",
+        "dotenv": "*",
+        "tsup": "*"
+    },
+    "dependencies": {
+        "drizzle-zod": "0.7.1"
     }
 }

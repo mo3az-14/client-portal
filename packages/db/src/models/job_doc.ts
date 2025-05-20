@@ -18,7 +18,7 @@ export const jobDocumentRelations = relations(job_document, ({ one }) => ({
 
 
 const jobDocument = createInsertSchema(job_document, {
-    jobId: (schema) => schema.uuid(),
+    jobId: (schema) => schema,
     documentId: (schema) => schema.uuid(),
 })
 export type JobDocument = z.infer<typeof jobDocument>;

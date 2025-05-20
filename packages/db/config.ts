@@ -6,5 +6,5 @@ export type ENV = {
 }
 
 export const env: ENV = {
-    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL: process.env.DATABASE_URL!,
 } 

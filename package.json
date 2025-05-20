@@ -21,8 +21,11 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "packageManager": "bun@1.0.0",
+  "packageManager": "bun@1.2.13",
   "dependencies": {
     "tsup": "^8.5.0"
-  }
+  },
+  "trustedDependencies": [
+    "@tailwindcss/oxide"
+  ]
 }

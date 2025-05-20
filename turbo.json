@@ -44,6 +44,11 @@
         "!.next/cache/**"
       ]
     },
+    "@client-portal/api#build": {
+      "dependsOn": [
+        "@client-portal/db#build"
+      ]
+    },
     "lint": {},
     "dev": {
       "dependsOn": [
