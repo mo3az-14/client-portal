@@ -8,6 +8,7 @@ import documentRoutes from "./routes/document.route"
 import { uploadRouterHandler } from './routes/uploadthing.route';
 export * from "./routes/uploadthing.route"
 import type { Session, User } from 'better-auth';
+import { logRequest } from './middleware/auth.middleware';
 declare module "express-serve-static-core" {
     interface Request {
         session: Session,
@@ -26,6 +27,7 @@ console.log(process.env.CLIENT_URL)
 //     credentials: true,
 // }));
 // app.options('*ss', cors());
+app.use('*ssc', logRequest)
 app.all("/api/auth/*s", toNodeHandler(auth));
 
 app.use(express.json());
