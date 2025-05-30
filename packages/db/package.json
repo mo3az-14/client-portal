@@ -13,7 +13,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup && tsup --dts-only && bunx drizzle-kit push",
+        "build": "tsup && tsup --dts-only",
         "dev": "tsc --watch"
     },
     "peerDependencies": {
