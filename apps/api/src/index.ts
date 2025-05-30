@@ -34,7 +34,7 @@ app.use("/api/uploadthing", uploadRouterHandler);
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../../web/dist")));
     app.get('*ssssss', (req, res) => {
-        res.sendFile(path.join(__dirname, "../../web/dist"));
+        res.sendFile(path.join(__dirname, "../../web/dist/index.html"));
     });
 
 }
