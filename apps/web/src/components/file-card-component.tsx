@@ -12,10 +12,12 @@ import {
     Calendar,
     Mail,
     Presentation,
-    Globe
+    Globe,
+    Download,
+    Trash2
 } from 'lucide-react';
 
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { default as axios } from "src/lib/axios"
 import { SkeletonCard } from "./skeleton-card"
 
@@ -23,37 +25,105 @@ type FileInformation = {
     name: string,
     type: string,
     url: string
+    key: string
 }
 
 type Files = {
     message: string,
     files: FileInformation[]
 }
+
 const getDocuments = async (): Promise<Files> => {
     const response = await axios.get<Files>('/documents')
     return response.data
 }
 
+
+const deleteDocument = async (key: string): Promise<void> => {
+    console.log(key)
+    await axios.delete("/documents/", {
+        data: {
+            key
+        }
+    })
+}
+
 const FileGallery = () => {
-    //
+    const queryClient = useQueryClient()
+
     const { data, isLoading } = useQuery<Files>({
         queryKey: ["documents"],
         queryFn: getDocuments,
         staleTime: 0
-
     })
+
+    const deleteMutation = useMutation({
+        mutationFn: deleteDocument,
+        onSuccess: () => {
+            // Invalidate and refetch documents after successful deletion
+            queryClient.invalidateQueries({ queryKey: ["documents"] })
+        },
+        onError: (error) => {
+            console.error('Failed to delete file:', error)
+            // You might want to show a toast notification here
+        }
+    })
+
+    const handleDelete = (fileName: string, key: string, event: React.MouseEvent) => {
+        event.preventDefault() // Prevent the link from being followed
+        event.stopPropagation()
+
+        if (window.confirm(`Are you sure you want to delete "${fileName}"?`)) {
+            deleteMutation.mutate(key)
+        }
+    }
+
+    const handleDownload = async (url: string, fileName: string, event: React.MouseEvent) => {
+        event.preventDefault() // Prevent the link from being followed
+        event.stopPropagation()
+
+        try {
+            const response = await fetch(url)
+            const blob = await response.blob()
+
+            // Create a temporary URL for the blob
+            const downloadUrl = window.URL.createObjectURL(blob)
+
+            // Create a temporary anchor element and trigger download
+            const link = document.createElement('a')
+            link.href = downloadUrl
+            link.download = fileName
+            document.body.appendChild(link)
+            link.click()
+
+            // Clean up
+            document.body.removeChild(link)
+            window.URL.revokeObjectURL(downloadUrl)
+        } catch (error) {
+            console.error('Failed to download file:', error)
+            // Fallback: open in new tab
+            window.open(url, '_blank')
+        }
+    }
+
     if (isLoading) {
         return <SkeletonCard />
     }
+
     const files = data?.files
-    // Example data - you would replace this with your actual data
 
     return (
         <div className="p-6 min-h-screen">
-            <h1 className="text-2xl font-bold mb-6 ">My Files</h1>
+            <h1 className="text-2xl font-bold mb-6">My Files</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {files?.map((file, index) => (
-                    <FileCard key={index} file={file} />
+                    <FileCard
+                        key={index}
+                        file={file}
+                        onDelete={handleDelete}
+                        onDownload={handleDownload}
+                        isDeleting={deleteMutation.isPending}
+                    />
                 ))}
             </div>
         </div>
@@ -61,8 +131,24 @@ const FileGallery = () => {
 };
 
 // File card component that displays an individual file
-const FileCard = ({ file }: { file: FileInformation }) => {
-    const { name, type, url } = file;
+const FileCard = ({
+    file,
+    onDelete,
+    onDownload,
+    isDeleting
+}: {
+    file: FileInformation;
+    onDelete: (fileName: string, key: string, event: React.MouseEvent) => void;
+    onDownload: (url: string, fileName: string, event: React.MouseEvent) => void;
+    isDeleting: boolean;
+}) => {
+    const { name, type, url, key } = file;
+
+    // Truncate name if longer than 30 characters
+    const truncateName = (fileName: string, maxLength: number = 30) => {
+        if (fileName.length <= maxLength) return fileName;
+        return fileName.substring(0, maxLength) + '...';
+    };
 
     const getFileCategory = (mimeType: string) => {
         const mimeTypeLower = mimeType.toLowerCase();
@@ -194,7 +280,6 @@ const FileCard = ({ file }: { file: FileInformation }) => {
         }
     };
 
-
     const getFileTypeName = (mimeType: string) => {
         const category = getFileCategory(mimeType);
 
@@ -240,26 +325,47 @@ const FileCard = ({ file }: { file: FileInformation }) => {
     };
 
     return (
-        <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`block bg-slate-700 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
-        >
-            <div className="p-6 flex flex-col items-center">
-                <div className=" mb-4">
-                    {getFileIcon()}
+        <div className="relative group">
+            <a
+                download="Icon.txt"
+                href={url}
+                rel="noopener noreferrer"
+                className="block bg-slate-700 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+            >
+                <div className="p-6 flex flex-col items-center">
+                    <div className="mb-4">
+                        {getFileIcon()}
+                    </div>
+                    <div className="w-full">
+                        <h3 className="text-center font-medium truncate" title={name}>
+                            {truncateName(name)}
+                        </h3>
+                        <p className="text-xs text-center mt-1">
+                            {getFileTypeName(type)}
+                        </p>
+                    </div>
                 </div>
-                <div className="">
-                    <h3 className="text-center font-medium  truncate" title={name}>
-                        {name}
-                    </h3>
-                    <p className="text-xs text-center mt-1">
-                        {getFileTypeName(type)}
-                    </p>
-                </div>
+            </a>
+
+            {/* Action buttons - shown on hover */}
+            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
+                <button
+                    onClick={(e) => onDownload(url, name, e)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-colors duration-200"
+                    title="Download file"
+                >
+                    <Download size={16} />
+                </button>
+                <button
+                    onClick={(e) => onDelete(name, key, e)}
+                    disabled={isDeleting}
+                    className="bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white p-2 rounded-full shadow-lg transition-colors duration-200"
+                    title="Delete file"
+                >
+                    <Trash2 size={16} />
+                </button>
             </div>
-        </a>
+        </div>
     );
 };
 

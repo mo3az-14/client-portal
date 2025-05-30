@@ -19,7 +19,7 @@ const PORT = process.env.SERVER_PORT;
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../../web/dist")));
+console.log(process.env.CLIENT_URL)
 app.use(cors({
     origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -31,6 +31,13 @@ app.all("/api/auth/*s", toNodeHandler(auth));
 app.use(express.json());
 app.use('/api', documentRoutes)
 app.use("/api/uploadthing", uploadRouterHandler);
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../../web/dist")));
+    app.get('*ssssss', (req, res) => {
+        res.sendFile(path.join(__dirname, "../../web/dist"));
+    });
+
+}
 app.listen(PORT, () => {
     console.log("server listening on port: " + PORT)
 })

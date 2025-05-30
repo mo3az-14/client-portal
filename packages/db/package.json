@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "build": "tsup && tsup --dts-only && bunx drizzle-kit push",
-        "dev": "tsc --watch "
+        "dev": "tsc --watch"
     },
     "peerDependencies": {
         "drizzle-orm": "*",
