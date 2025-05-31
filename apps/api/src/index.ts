@@ -27,12 +27,12 @@ console.log(process.env.CLIENT_URL)
 //     credentials: true,
 // }));
 // app.options('*ss', cors());
-app.use('*ssc', logRequest)
+// app.use('*ssc', logRequest)
 app.all("/api/auth/*s", toNodeHandler(auth));
 
 app.use(express.json());
 app.use('/api', documentRoutes)
-app.use("/api/uploadthing", uploadRouterHandler);
+app.use("/api/uploadthing", logRequest, uploadRouterHandler);
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../../web/dist")));
     app.get('*ssssss', (req, res) => {
