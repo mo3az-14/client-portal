@@ -21,11 +21,7 @@ const PORT = process.env.SERVER_PORT;
 const app = express();
 
 console.log(process.env.CLIENT_URL)
-app.use(cors({
-    origin: process.env.CLIENT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true,
-}));
+app.use(cors());
 app.options('*ss', cors());
 // app.use('*ssc', logRequest)
 app.all("/api/auth/*s", toNodeHandler(auth));
