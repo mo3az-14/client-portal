@@ -23,15 +23,18 @@ app.enable("trust proxy");
 
 console.log(process.env.CLIENT_URL)
 
-app.use(cors());
-app.options('*ss', cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+})); app.options('*ss', cors());
 //
 // app.use('*ssc', logRequest)
 app.all("/api/auth/*s", toNodeHandler(auth));
 
+app.use(express.json());
 app.use("/api/uploadthing", logRequest, uploadRouterHandler);
 
-app.use(express.json());
 app.use('/api', documentRoutes)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../../web/dist")));
