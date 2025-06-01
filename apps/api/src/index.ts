@@ -21,14 +21,14 @@ const app = express();
 
 console.log(process.env.CLIENT_URL)
 
+
+app.use('*ssc', logRequest)
 app.use(cors());
 app.options('*ss', cors());
-//
-// app.use('*ssc', logRequest)
 app.all("/api/auth/*s", toNodeHandler(auth));
 
 app.use(express.json());
-app.use("/api/uploadthing", logRequest, uploadRouterHandler);
+app.use("/api/uploadthing", uploadRouterHandler);
 
 app.use('/api', documentRoutes)
 if (process.env.NODE_ENV === "production") {
