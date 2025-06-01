@@ -24,6 +24,7 @@ export const logRequest = (req: Request, res: Response, next: NextFunction) => {
     console.log("Secure (HTTPS?)", req.secure);
     console.log("Host header:", req.get("Host"));
     console.log("Original URL:", req.originalUrl);
+    console.log("Full URL:", req.baseUrl);
     console.log("Path:", req.path);
 
     console.log("Client IP:", req.ip);
