@@ -20,6 +20,8 @@ const PORT = process.env.SERVER_PORT;
 
 const app = express();
 
+app.enable("trust proxy");
+
 console.log(process.env.CLIENT_URL)
 app.use(cors());
 app.options('*ss', cors());
