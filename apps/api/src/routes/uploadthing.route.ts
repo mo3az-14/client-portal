@@ -42,6 +42,8 @@ export const uploadRouter = {
             console.log("an error happened while inserting document in database")
             console.log(error)
         }
+        return { file: "" }
+
     }),
 } satisfies FileRouter;
 
